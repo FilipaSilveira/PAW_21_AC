@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Iniciar Sessao</h1>
+      <form action="/teste" method="GET">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <button type="submit">Iniciar Sessao</button>
+      </form>
+      <i>Não tem conta criada?</i><b><a href="#">Registar</a></b>
+    </div>
+  </body>
+</html>
