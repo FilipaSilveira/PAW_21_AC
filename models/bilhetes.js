@@ -15,9 +15,14 @@ const BilhetesSchema = new mongoose.Schema({
     },
     data_reserva:{ 
         type: Date, 
-        min:'2021-04-15',
-        max:'2050-04-15',
+        default:Date.now,
         require: true
+    },
+    estado:{
+        type:String,
+        enum : ['cancelado','pendente','confirmado'],
+        default: 'pendente',
+        require:true
     },
     teste_covid:{
         type:String,

@@ -35,12 +35,10 @@ let seconds = date_ob.getSeconds();
   }
   const novo_bilhete=new Bilhetes(bilhete);
   novo_bilhete.save();
-  setTimeout(function () {
-    console.log('boo')
-  }, 1000)
-  Bilhetes.findOne({teste_covid:"negativo"},function(err,result){
+  res.send(bilhete);  
+  /*Bilhetes.findOne({teste_covid:"negativo"},function(err,result){
     console.log(result);
     res.send(bilhete);    
-  })
+  })*/
 });
 module.exports = router;

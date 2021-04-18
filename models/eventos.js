@@ -17,19 +17,11 @@ const EventosSchema = new mongoose.Schema({
         max:'2050-04-15',
         require: true
     },
-    morada:{
-        type:String,
-        maxlength:100,
-        minlength:1
-    },
-    limitacao_lotacao:{
-        type:Number,
-        min:1,
-        max:99
-    },
-    lotacao:{
-        type:Number,
-        min:1
+    codigo_local:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'locais',
+        unique:true,
+        require:true
     },
     descricao:{
         type: String,
