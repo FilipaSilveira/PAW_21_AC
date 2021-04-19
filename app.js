@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var utilizadoresRouter = require('./routes/utilizador');
+var promotoresRouter=require('./routes/promotor');
+var adminRouter=require('./routes/admin');
 
 var app = express();
 
@@ -29,7 +31,9 @@ mongoose.connect("mongodb://localhost/eventos",{useNewUrlParser:true})
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
+app.use('/promotor', promotoresRouter);
+app.use('/utilizador', utilizadoresRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
