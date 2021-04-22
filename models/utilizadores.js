@@ -32,6 +32,9 @@ const UtilizadoresSchema = new mongoose.Schema({
         type:Date,
         require:true
     }
+},
+{
+    timestamps:true
 });
 
 module.exports = mongoose.model("Utilizadores", UtilizadoresSchema);

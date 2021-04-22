@@ -20,6 +20,9 @@ const LocaisSchema = new mongoose.Schema({
         unique:true,
         require:true
     }
+},
+{
+    timestamps:true
 });
 
 module.exports = mongoose.model("Locais", LocaisSchema);

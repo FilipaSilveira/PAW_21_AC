@@ -37,6 +37,9 @@ const EventosSchema = new mongoose.Schema({
         unique:true,
         require:true
     }
+},
+{
+    timestamps:true
 });
 
 module.exports = mongoose.model("Eventos", EventosSchema);
