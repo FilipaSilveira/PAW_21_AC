@@ -1,3 +1,4 @@
+const { text } = require("express");
 const mongoose = require("mongoose");
 
 const UtilizadoresSchema = new mongoose.Schema({
@@ -7,7 +8,7 @@ const UtilizadoresSchema = new mongoose.Schema({
         require:true
     },
     email:{
-        type:mongoose.SchemaTypes.Email,
+        type:String,
         require:true
     },
     password:{
@@ -15,10 +16,10 @@ const UtilizadoresSchema = new mongoose.Schema({
         length:50,
         require:true
     },
-    id:{
+    nif:{
         type:Number,
-        min: 8,
-        max:8,
+        min:11111111,
+        max:99999999,
         unique:true,
         require:true
     },

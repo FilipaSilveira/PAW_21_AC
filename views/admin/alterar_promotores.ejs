@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Alterar Promotor</h1>
+      <form action="/admin/promotores/alterar" method="POST">
+        <input type="hidden" name="_id" value="<%= promotor._id %>">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" value="<%= promotor.email%>" required/>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password" value="<%= promotor.password%>" required
+        />
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome" value="<%= promotor.nome%>" required/>
+
+        <label for="nif">Numero Identificaçao Fiscal</label>
+        <input type="number" id="nif" name="nif" placeholder="NIF" minlength="8" maxlength="8" value="<%= promotor.nif%>" required/>
+
+        <label for="nome">Data de nascimento</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Data" value="<%= promotor.data_nascimento%>" required/>
+
+        <button type="submit">Alterar Promotor</button>
+      </form>
+    </div>
+  </body>
+</html>

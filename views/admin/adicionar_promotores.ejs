@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Adicionar Promotor</h1>
+      <form action="/admin/promotores/adicionar" method="POST">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome" required/>
+
+        <label for="nif">Numero Identificaçao Fiscal</label>
+        <input
+          type="number"
+          id="nif"
+          name="nif"
+          placeholder="NIF"
+          minlength="8"
+          maxlength="8"
+          required
+        />
+
+        <label for="nome">Data de nascimento</label>
+        <input
+          type="date"
+          id="data_nascimento"
+          name="data_nascimento"
+          placeholder="Data"
+          required
+        />
+
+        <button type="submit">Criar Promotor</button>
+      </form>
+    </div>
+  </body>
+</html>
