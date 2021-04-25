@@ -1,12 +1,32 @@
 var express = require('express');
 var router = express.Router();
-const Bilhetes=require("../models/bilhetes");
+const IndexController=require("../controllers/indexController");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Eventos Culturais' });
+  IndexController.index(req,res,next);
 });
 
-router.get('/teste', function(req, res, next) {
+router.get('/login', function(req, res, next) {
+  IndexController.login(req,res,next);
+  
+});
+
+router.post('/login', function(req, res, next) {
+  IndexController.login2(req,res,next);
+  
+});
+router.get('/registar', function(req, res, next) {
+  IndexController.registar(req,res,next);
+ 
+});
+
+
+
+router.post('/registar', function(req, res, next) {
+  IndexController.registar2(req,res,next);
+});
+
+ /*router.get('/teste', function(req, res, next) {
   let date_ob = new Date();
 
 let date = ("0" + date_ob.getDate()).slice(-2);
@@ -36,9 +56,10 @@ let seconds = date_ob.getSeconds();
   const novo_bilhete=new Bilhetes(bilhete);
   novo_bilhete.save();
   res.send(bilhete);  
-  /*Bilhetes.findOne({teste_covid:"negativo"},function(err,result){
+  Bilhetes.findOne({teste_covid:"negativo"},function(err,result){
     console.log(result);
     res.send(bilhete);    
-  })*/
-});
+  })
+}); */
+
 module.exports = router;

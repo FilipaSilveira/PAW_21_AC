@@ -60,7 +60,7 @@ article img {
 body{
   display: flex;
   justify-content: center;
-  background: rgb(247, 247, 247);
+  /*background: rgb(247, 247, 247);*/
 }
 
 .nav_index_page {
@@ -81,7 +81,7 @@ a{
 }
 
 .login_register {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;  
   border-radius: 20%;
   color: white;
   border: 2px solid #555555;
@@ -105,7 +105,7 @@ a{
   display: flex;
   flex-flow: column wrap;
   /*align-content: space-around;*/
-  background: black;
+  /*background: black;*/
   width: 1200px;
 }
 
@@ -113,7 +113,7 @@ a{
   color: #4CAF50;
   float: left;
   order: 2;
-  background: lightcoral;
+  /*background: lightcoral;*/
   width: 100%;
   text-align: start;
   font-family: 'Courier New', monospace;
@@ -122,7 +122,7 @@ a{
 .login{
   float: left;
   width: 100%;
-  background: blueviolet;
+  /*background: blueviolet;*/
   font-size: 10px;
   order:1;
   text-align: end;
@@ -130,7 +130,7 @@ a{
 .sub_title {
   float: left;
   width: 55%;
-  background-color: aqua;
+  /*background-color: aqua;*/
   font-size: 10 px;
   align-self: flex-start;
   order:3;
@@ -139,7 +139,7 @@ a{
 nav {
   float: left;
   width: 20%; /* only for demonstration, should be removed */
-  background: red;
+  /*background: red;*/
   padding: 20px;
   height: 100%;
 }
@@ -148,7 +148,7 @@ nav ul {
   padding: 0;
 }
 header {
-  background-color: blue;
+  /*background-color: blue;*/
   margin: 0;
   padding: 10px;
   display: flex;
@@ -160,7 +160,7 @@ article {
   float: left;
   padding: 20px;
   width: 80%;
-  background-color: yellow; /* only for demonstration, should be removed */
+  /*background-color: yellow; */
 }
 section:after {
   content: "";
@@ -168,7 +168,7 @@ section:after {
   clear: both;
 }
 footer {
-  background-color: blue;
+  /*background-color: blue;*/
   /*background-image: url("../images/teste.jpg");*/
   padding: 10px;
 }

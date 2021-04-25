@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+
+<h3> Lista de Clientes</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Nif</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var cliente of clientes) { %>       
+            <tr>
+            <td><%= clinte.nome %></td>
+            <td><%= cliente.nif %></td>
+            <td>
+                <a href="/admin/utilizadores/alterar/<%= cliente.nif %> ">alterar</a>
+                <a href="/admin/utilizadores/remover/<%= cliente.nif %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">remover</a>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+    
+</table>
+<!--  <a href="/admin/utilizadores/adicionar"> Adicionar Novo</a>    -->
+<a href="/admin/utilizadores"> voltar</a>
+</body>
+</html>
