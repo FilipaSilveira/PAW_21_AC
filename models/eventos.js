@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const EventosSchema = new mongoose.Schema({
-    nome_evento:{
+    nome:{
         type: String,
         maxlength:50,
         require: true
@@ -10,12 +10,6 @@ const EventosSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'utilizadores',
         require:true
-    },
-    data_evento:{ 
-        type: Date, 
-        min:'2021-04-15',
-        max:'2050-04-15',
-        require: true
     },
     codigo_local:{
         type:mongoose.Schema.Types.ObjectId,

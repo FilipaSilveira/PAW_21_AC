@@ -10,7 +10,7 @@ IndexController.login=function(req,res){
     IndexController.login2=function(req,res){
         //validacoes
         Utilizadores.findOne({email:req.body.email,password:req.body.password},(err,utilizador)=>{
-            if(utilizador.length==0){
+            if(!utilizador){
                 console.log("utilizador nao encontrado");
                 res.render("login",{ title: 'Iniciar sessao' });
             }
@@ -34,6 +34,73 @@ IndexController.login=function(req,res){
         res.render('registar', { title: 'Criar conta' });
     }
     IndexController.registar2=function(req,res){
+        const { nome, email, password, nif,data_nascimento } = req.body;
+        let errors = [];
+      
+        if (!nome || !email || !password || !nif || !data_nascimento ) {
+          errors.push({ msg: 'Please enter all fields' });
+        }
+      
+     /*   if (password != password2) {
+          errors.push({ msg: 'Passwords do not match' });
+        }
+      */
+        if (password.length < 6) {
+          errors.push({ msg: 'Password must be at least 6 characters' });
+        }
+      
+        if (errors.length > 0) {
+          res.render('registar', {
+            errors,
+            nome,
+            email,
+            password,
+            nif,
+            data_nascimento
+          });
+        } else {
+          Utilizadores.findOne({ email: email }).then(utilizador => {
+            if (utilizador) {
+              errors.push({ msg: 'Email already exists' });
+              res.render('registar', {
+                errors,
+                nome,
+                email,
+                password,
+                nif,
+                data_nascimento
+              });
+            } else {
+              const novoUtilizador = new Utilizadores({
+                nome,
+                email,
+                password,
+                nif,
+                data_nascimento
+              });
+      
+              bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(novoUtilizador.password, salt, (err, hash) => {
+                  if (err) throw err;
+                  novoUtilizador.password = hash;
+                  novoUtilizador
+                    .save()
+                    .then(utilizador => {
+                      req.flash(
+                        'success_msg',
+                        'You are now registered and can log in'
+                      );
+                      res.redirect('/login');
+                    })
+                    .catch(err => console.log(err));
+                });
+              });
+            }
+          });
+        }
+      
+
+
        //validaçoes
   const cliente = {
     nome: req.body.nome,

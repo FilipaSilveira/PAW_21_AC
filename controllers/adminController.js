@@ -7,18 +7,18 @@ AdminController.index = function (req, res, next) {
 };
 
 AdminController.index_promotores = function (req, res, next) {
-  res.render("admin/promotores", { title: "Promotores" });
+  res.render("admin/promotores/promotores", { title: "Promotores" });
 };
 
 AdminController.adicionar_promotores = function (req, res, next) {
-  res.render("admin/adicionar_promotores", { title: "Adicionar Promotores" });
+  res.render("admin/promotores/adicionar_promotores", { title: "Adicionar Promotores" });
 };
 AdminController.alterar_promotores = function (req, res, next) {
     Utilizadores.findOne({nif:req.params.nif},(err,promotor)=>{
         if(err){
             next(err);
         }
-        res.render("admin/alterar_promotores", {title:"Alterar Promotor", promotor: promotor });
+        res.render("admin/promotores/alterar_promotores", {title:"Alterar Promotor", promotor: promotor });
     })
   
 };
@@ -32,7 +32,7 @@ AdminController.alterar_promotores2 = function (req, res, next) {
         if(err){
             next(err);
         }
-        res.render("admin/promotores", {title:"Promotores"});
+        res.render("admin/promotores/promotores", {title:"Promotores"});
     })
   
 };
@@ -47,7 +47,7 @@ AdminController.remover_promotores = function (req, res, next) {
               next(err);
             }
             console.log(promotores);
-            res.render("admin/listar_promotores", {title:"Promotores", promotores: promotores });
+            res.render("admin/promotores/listar_promotores", {title:"Promotores", promotores: promotores });
     })
 });
 }
@@ -65,7 +65,7 @@ AdminController.guardar_promotor = function (req, res, next) {
   novo_promotor.save();
   console.log(novo_promotor);
   console.log("Promotor adicionado com sucesso!");
-  res.render("admin/promotores", { title: "Promotores" });
+  res.render("admin/promotores/promotores", { title: "Promotores" });
 };
 
 AdminController.listar_promotores = function (req, res, next) {
@@ -74,13 +74,13 @@ AdminController.listar_promotores = function (req, res, next) {
       next(err);
     }
     console.log(promotores);
-    res.render("admin/listar_promotores", {title:"Promotores", promotores: promotores });
+    res.render("admin/promotores/listar_promotores", {title:"Promotores", promotores: promotores });
   });
 };
 
 
 AdminController.index_utilizadores = function (req, res, next) {
-  res.render("admin/utilizadores", { title: "Utilizadores" });
+  res.render("admin/utilizadores/utilizadores", { title: "Utilizadores" });
 };
 
 
@@ -91,9 +91,9 @@ AdminController.listar_utilizadores = function (req, res, next) {
     }
     console.log(clientes);
     if(clientes.length==0){
-      res.render("admin/utilizadores",{title:"Utilizadores"})
+      res.render("admin/utilizadores/utilizadores",{title:"Utilizadores"})
     }
-    res.render("admin/listar_utilizadores", {title:"Utilizadores", clientes: clientes });
+    res.render("admin/utilizadores/listar_utilizadores", {title:"Utilizadores", clientes: clientes });
   });
 };
 
@@ -102,7 +102,7 @@ AdminController.alterar_utilizadores = function (req, res, next) {
       if(err){
           next(err);
       }
-      res.render("admin/alterar_utilizadores", {title:"Alterar Cliente", cliente: cliente });
+      res.render("admin/utilizadores/alterar_utilizadores", {title:"Alterar Cliente", cliente: cliente });
   })
 
 };
@@ -116,7 +116,7 @@ AdminController.alterar_utilizadores2 = function (req, res, next) {
       if(err){
           next(err);
       }
-      res.render("admin/utilizadores", {title:"Utilizadores"});
+      res.render("admin/utilizadores/utilizadores", {title:"Utilizadores"});
   })
 
 };

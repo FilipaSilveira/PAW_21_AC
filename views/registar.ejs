@@ -7,18 +7,22 @@
   <body>
     <div class="container">
       <h1>Criar conta</h1>
+      <%- include('alertas') %>
       <form action="/registar" method="POST">
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome" required/>
+        <input type="text" id="nome" name="nome" placeholder="Nome" value="<%= typeof nome != 'undefined' ? nome : '' %>" required/>
+
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email" />
+        <input type="email" id="email" name="email" placeholder="Email" value="<%= typeof email != 'undefined' ? email : '' %>" required/>
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
           name="password"
           placeholder="Password"
+          value="<%= typeof password != 'undefined' ? password : '' %>"
+          required
         />
         <label for="nif">Numero Identificaçao Fiscal</label>
         <input
@@ -28,6 +32,7 @@
           placeholder="NIF"
           minlength="8"
           maxlength="8"
+          value="<%= typeof nif != 'undefined' ? nif : '' %>"
           required
         />
 
@@ -37,6 +42,7 @@
           id="data_nascimento"
           name="data_nascimento"
           placeholder="Data"
+          value="<%= typeof data != 'undefined' ? data : '' %>"
           required
         />
         <button type="submit">Registar</button>

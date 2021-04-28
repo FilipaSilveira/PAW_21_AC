@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Adicionar Evento</h1>
+      <form action="/promotor/eventos/adicionar_evento/<%= local %>/<%= _idPromotor%>" method="POST">
+        <label for="nome">Nome do Evento</label>
+        <input
+          type="string"
+          id="nome"
+          name="nome"
+          placeholder="Nome do Evento"
+          required
+        />
+        <label for="lotacao">Data Evento</label>
+        <input
+          type="date"
+          id="data"
+          name="data"
+          placeholder="Data"
+          required
+        />
+        <label for="descricao">Descricao</label>
+        <input
+          type="string"
+          id="descricao"
+          name="descricao"
+          placeholder="Descriçao"
+          required
+        />
+        <label for="preco">Preco do Bilhete</label>
+        <input
+          type="number"
+          id="preco"
+          name="preco"
+          placeholder="Preço"
+          min="1"
+          required
+        />
+        <button type="submit">Criar Evento</button>
+      </form>
+    </div>
+  </body>
+</html>

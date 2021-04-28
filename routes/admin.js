@@ -5,9 +5,7 @@ router.get('/', function(req, res, next) {
   AdminController.index(req,res,next);
 });
 
-router.get('/promotores', function(req, res, next) {
-  AdminController.index_promotores(req,res,next);
-});
+router.get('/promotores',AdminController.index_promotores);
 
 router.get('/promotores/adicionar', function(req, res, next) {
   AdminController.adicionar_promotores(req,res,next);

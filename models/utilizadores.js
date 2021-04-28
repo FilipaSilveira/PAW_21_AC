@@ -1,4 +1,3 @@
-const { text } = require("express");
 const mongoose = require("mongoose");
 
 const UtilizadoresSchema = new mongoose.Schema({
@@ -26,7 +25,6 @@ const UtilizadoresSchema = new mongoose.Schema({
     tipo_utilizador: {
         type: String,
         enum : ['admin','promotor','cliente'],
-        default: 'admin',
         require:true
     },
     data_nascimento:{

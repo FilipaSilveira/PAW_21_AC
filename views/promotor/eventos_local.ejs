@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+
+<h3> Lista de Eventos do local</h3>
+<% if(eventos.length==0){ %>
+    <h2>Este local ainda nao tem eventos associados!</h2>
+    <a href="/promotor/eventos/adicionar_evento/<%= local %>">Criar novo evento para este local</a>
+    <% } else{ %>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome Evento</th>
+            <th>Data</th>
+            <th>Descriçao</th>
+            <th>Preco bilhete</th>
+            <th>Codigo do Evento</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var evento of eventos) { %>       
+            <tr>
+            <td><%= evento.nome %></td>
+            <td><%= evento.data %></td>
+            <td><%= evento.descricao %></td>
+            <td><%= evento.preco_bilhete %></td>
+            <td><%= evento.codigo_evento %></td>
+            <td>
+                <a href="/promotor/eventos/alterar_evento/<%= local %>/<%= evento._id %> ">Alterar Evento</a>
+                <a href="/promotor/eventos/remover_evento/<%= local %>/<%= evento._id %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">Remover Evento</a>
+            </td>
+        </tr>
+        <% } }%>
+    </tbody>
+    
+</table>
+<a href="/promotor/eventos/adicionar_evento/<%= local%>">Adicionar novo evento</a>
+<a href="/promotor/locais_espetaculos"> voltar</a>
+</body>
+</html>

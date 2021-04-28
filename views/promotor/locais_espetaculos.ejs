@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+
+<h3> Lista de Locais de Espetaculos</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Morada</th>
+            <th>Lotaçao</th>
+            <th>Limitaçao da Lotaçao</th>
+            <th>Codigo do Local</th>
+            <th>Eventos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var local of locais) { %>       
+            <tr>
+            <td><%= local.morada %></td>
+            <td><%= local.lotacao %></td>
+            <td><%= local.limitacao_lotacao %></td>
+            <td><%= local.codigo_local %></td>
+            <td><a href="/promotor/eventos/<%= local._id%>">Mostrar Eventos</a></td>
+            <td>
+                <a href="/promotor/alterar_local/<%= local._id %> ">Alterar Local</a>
+                <a href="/promotor/remover_local/<%= local._id %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">Remover Local</a>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+    
+</table>
+<a href="/promotor/adicionar_local"> Adicionar Novo Local</a>
+<a href="/promotor"> voltar</a>
+</body>
+</html>
