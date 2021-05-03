@@ -1,68 +1,36 @@
-const { NotExtended } = require("http-errors");
 const Locais = require("../models/locais");
 const Eventos=require("../models/eventos");
 const PromotorController = {};
 
+//Mostra a pagina incial do Promotor
+
 PromotorController.index = function (req, res, next) {
-  res.render("promotor/index_promotor", { title: "Promotor" });
+  res.render("promotor/index_promotor",);
 };
+
+//Listagem dos locais de espetaculos inseridos pelo promotor
+
 PromotorController.locais_espetaculos = function (req, res) {
-  console.log(req.user);
   Locais.find({id_promotor:req.user._id}, (err, locais) => {
     if (err) {
       next(err);
     }
     res.render("promotor/locais_espetaculos", {
-      title: "Locais Espetaculos",
       locais: locais,
     });
   });
 };
 
+//Mostra a pagina com o formulario para adicionar um local de espetaculos
+
 PromotorController.adicionar_local = function (req, res, next) {
-  res.render("promotor/adicionar_local", { title: "Adicionar Local" });
+  res.render("promotor/adicionar_local");
 };
 
-PromotorController.alterar_local = function (req, res, next) {
-  Locais.findOne({_id:req.params.id},(err,local)=>{
-    if(err){
-      next(err);
-    }
-    res.render("promotor/alterar_local", { title: "Alterar Local", local:local });
-  })
-  
-};
-
-PromotorController.atualizar_local = function (req, res, next) {
-  Locais.findOneAndUpdate({_id:req.params.id},{$set:{morada: req.body.morada,
-    lotacao: req.body.lotacao,
-    limitacao_lotacao: req.body.limitacao_lotacao}},{new:true},(err)=>{
-    if(err){
-        next(err);
-    }
-      res.redirect("/promotor/locais_espetaculos");
-    });
-};
-
-
-
-PromotorController.remover_local = function (req, res, next) {
-  Locais.remove({_id:req.params.id},(err)=>{
-    if(err){
-      next(err);
-    }
-    Eventos.remove({codigo_local:req.params.id},(err)=>{
-      if(err){
-        next(err);
-      }
-    })
-    res.redirect("/promotor/locais_espetaculos");
-  })
-};
-
+//Guarda na base da dados o local de espetaculos inserido
 
 PromotorController.guardar_local = function (req, res, next) {
-  //validaçoes
+   //inserir validaçoes mais tarde
 
   let cod_aleatorio = Math.floor(Math.random() * 10000 + 1);
   let data = new Date();
@@ -82,11 +50,53 @@ PromotorController.guardar_local = function (req, res, next) {
   };
   const novo_local = new Locais(local);
   novo_local.save();
-  console.log(novo_local);
   console.log("Local adicionado com sucesso!");
   res.redirect("/promotor/locais_espetaculos");
   
 };
+
+//Mostra a pagina com o formulario para alterar dados referentes a um local de espetaculos
+
+PromotorController.alterar_local = function (req, res, next) {
+  Locais.findOne({_id:req.params.id},(err,local)=>{
+    if(err){
+      next(err);
+    }
+    res.render("promotor/alterar_local", { local:local });
+  }) 
+};
+
+//Guarda na base de dados as alteraçoes efectudas
+
+PromotorController.atualizar_local = function (req, res, next) {
+  Locais.findOneAndUpdate({_id:req.params.id},{$set:{morada: req.body.morada,
+    lotacao: req.body.lotacao,
+    limitacao_lotacao: req.body.limitacao_lotacao}},{new:true},(err)=>{
+    if(err){
+        next(err);
+    }
+      res.redirect("/promotor/locais_espetaculos");
+    });
+};
+
+//Remove da base de dados um local de espetaculos inserido por um determinado promotor
+
+PromotorController.remover_local = function (req, res, next) {
+  Locais.remove({_id:req.params.id},(err)=>{
+    if(err){
+      next(err);
+    }
+    Eventos.remove({codigo_local:req.params.id},(err)=>{
+      if(err){
+        next(err);
+      }
+    })
+    res.redirect("/promotor/locais_espetaculos");
+  })
+};
+
+// Listagem de eventos de um determinado local de espetaculos
+
 PromotorController.listar_eventos = function (req, res) {
   Eventos.find({codigo_local:req.params.local},(err,eventos)=>{
     if(err){
@@ -96,19 +106,16 @@ PromotorController.listar_eventos = function (req, res) {
   })
 };
 
+//Mostra a pagina com o formulario para adicionar um evento a um determinado local de espetaculos
+
 PromotorController.adicionar_evento = function (req, res) {
-    
-  /* mudar o id promotor*/ //mudar id para adicionar mais eventos
-  res.render("promotor/adicionar_evento",{title:"Adicionar Evento",local:req.params.local,_idPromotor:'60858933413433ecb5b46672'});
-    
-    
+  res.render("promotor/adicionar_evento",{title:"Adicionar Evento",local:req.params.local,_idPromotor:req.user._id});
 };
 
+// Guarda na base de dados o evento criado
+
 PromotorController.guardar_evento = function (req, res) {
- //validaçoes
- // quantidade_bilhetes nao pode ser maior do que a capacidade permetida do local...
- //verificar isso antes e se der erro mandar redirect para a pagina com esses erros como se fez no registo
-//verificar se os campos estao vazios!
+ //inserir validaçoes mais tarde
  let errors=[];
  const nome= req.body.nome;
  const data=req.body.data;
@@ -116,13 +123,12 @@ PromotorController.guardar_evento = function (req, res) {
  const preco=req.body.preco;
  const bilhetes=req.body.bilhetes;
  const local=req.params.local;
+ const poster=file.filename;
 Locais.findOne({_id:req.params.local},(err,result)=>{
   if(err){
     next(err);
   }
- 
   const quantidade_bilhetes=Math.floor(result.lotacao-(result.lotacao * (result.limitacao_lotacao/100)));
- 
   if(bilhetes>quantidade_bilhetes){
     errors.push({msg:"Quantidade de bilhetes nao pode ser superior à capacidade permetida do local("+quantidade_bilhetes+")"});
     res.render("promotor/adicionar_evento",{
@@ -132,6 +138,7 @@ Locais.findOne({_id:req.params.local},(err,result)=>{
      data,
      descricao,
      preco,
+     poster,
      _idPromotor:req.user._id
     })
   }
@@ -150,7 +157,8 @@ Locais.findOne({_id:req.params.local},(err,result)=>{
   descricao:req.body.descricao,
   preco_bilhete: req.body.preco,
   quantidade_bilhetes:req.body.bilhetes,
-  codigo_evento:codigo_evento
+  codigo_evento:codigo_evento,
+  poster:poster
   }
 
   const novo_evento = new Eventos(evento);
@@ -161,6 +169,8 @@ res.redirect("/promotor/eventos/"+req.params.local);
 });
 };
 
+// Remove um evento da base de dados
+
 PromotorController.remover_evento = function (req, res) {
  Eventos.remove({_id:req.params.id_evento},(err)=>{
    if(err){
@@ -170,6 +180,8 @@ PromotorController.remover_evento = function (req, res) {
  })
 };
 
+//Mostra a pagina com o formulario para alterar um evento
+
 PromotorController.alterar_evento = function (req, res) {
   Eventos.findOne({_id:req.params.id_evento},(err,evento)=>{
     if(err){
@@ -177,8 +189,9 @@ PromotorController.alterar_evento = function (req, res) {
     }
     res.render("promotor/alterar_evento",{title:"Alterar Evento",evento:evento,local:req.params.local})
   })
-    
  };
+
+ //Guarda na base de dados as alteraçoes feitas ao evento
 
  PromotorController.atualizar_evento = function (req, res) {
   Eventos.findOneAndUpdate({_id:req.params.id_evento},{$set:{nome: req.body.nome,
@@ -192,10 +205,10 @@ PromotorController.alterar_evento = function (req, res) {
     });
  };
 
+// Mostra a pagina de gestao dos Bilhetes
+// Gestao dos bilheres incompleto.Acabar na 2 parte
 PromotorController.bilhetes = function (req, res) {
   res.render("promotor/bilhetes", { title: "Bilhetes" });
 };
-
-
 
 module.exports = PromotorController;

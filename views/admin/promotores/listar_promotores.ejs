@@ -29,9 +29,9 @@
           <td><%= promotor.email %></td>
           <td><%= data %></td>
           <td>
-            <a href="/admin/promotores/alterar/<%= promotor.nif %> ">alterar</a>
+            <a href="/admin/promotores/alterar/<%= promotor._id %> ">alterar</a>
             <a
-              href="/admin/promotores/remover/<%= promotor.nif %>"
+              href="/admin/promotores/remover/<%= promotor._id %>"
               onclick="return confirm('Tem a certeza que quer eliminar este registo?');"
               >remover</a
             >

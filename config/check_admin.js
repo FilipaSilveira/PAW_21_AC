@@ -4,7 +4,7 @@ CheckAdmin=async () => {
     console.log('coneçao establecida com a bsase de dados!')
     const admin = await Utilizadores.findOne({ email: 'admin@admin.com.pt' }).select('+password')
     if (!admin) {
-        console.log('creating admin user');   
+        console.log('criando uma conta admin');   
         bcrypt.genSalt(10, async (err, salt) => {
             bcrypt.hash("admin", salt, async (err, hash) => { 
             const admin = await new Utilizadores({

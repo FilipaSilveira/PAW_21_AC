@@ -6,28 +6,24 @@ const IndexController = {};
 //Encaminhar o tipo de utilizador para a sua homePage
 
 IndexController.dashboard = function (req, res) {
-
-
-  
   if (req.user.tipo_utilizador == "admin") {
-    res.render("admin/index_admin", {
-      title: "Admin",
-    });
+    res.redirect("/admin");
   } else if (req.user.tipo_utilizador == "promotor") {
-    res.render("promotor/index_promotor", { title: "Promotor" });
+    res.redirect("/promotor");
   } else {
-    res.render("utilizador/index_utilizador", { title: "Cliente" });
+    res.redirect("/utilizador");
   }
 };
 
-//Efectuar login
+//Mostra a pagina de  login
 
 IndexController.login = function (req, res) {
-  res.render("login", { title: "Iniciar sessao" });
+  res.render("login");
 };
 
+//Efetuar login
+
 IndexController.login2 = function (req, res, next) {
-  
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/login",
@@ -38,15 +34,16 @@ IndexController.login2 = function (req, res, next) {
 //Pagina de Registo
 
 IndexController.registar = function (req, res) {
-  res.render("registar", { title: "Criar conta" });
+  res.render("registar");
 };
 
-//Validar e guardar registo
+//Validar e guardar registo na base de dados
 
 IndexController.registar2 = function (req, res) {
+   //inserir validaçoes mais tarde
   const { nome, email, password, nif, data_nascimento } = req.body;
   let errors = [];
-
+  //validaçoes
   if (!nome || !email || !password || !nif || !data_nascimento) {
     errors.push({ msg: "Por favor preencha os campos todos!" });
   }
@@ -77,6 +74,7 @@ IndexController.registar2 = function (req, res) {
           nif,
           data_nascimento,
         });
+        //se as validaçoes correrem bem
       } else {
         const novoUtilizador = new Utilizadores({
           nome,
@@ -86,7 +84,7 @@ IndexController.registar2 = function (req, res) {
           data_nascimento,
           tipo_utilizador: "cliente",
         });
-
+        // geracao de uma hash da password para armazenar na base de dados
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(novoUtilizador.password, salt, (err, hash) => {
             if (err) throw err;
@@ -107,6 +105,9 @@ IndexController.registar2 = function (req, res) {
     });
   }
 };
+
+//Termino de Sessao e redirecionamento para a pagina de login
+
 IndexController.logout=function(req,res,next){
     req.logout();
     req.flash('success_msg', 'Terminou a Sessao');

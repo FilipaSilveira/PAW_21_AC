@@ -11,6 +11,10 @@ const flash = require('connect-flash');
 const {  ensureAuthenticated } = require('./config/auth');
 const Check_Admin=require("./config/check_admin");
 var app = express();
+var swaggerUi=require("swagger-ui-express");
+var swaggerDocument=require("./swagger.json");
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,6 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'))
 
 // Express session
 app.use(
@@ -71,6 +76,10 @@ app.use('/admin', ensureAuthenticated,adminRouter);
 app.use('/promotor', ensureAuthenticated,promotoresRouter);
 app.use('/utilizador', ensureAuthenticated,utilizadoresRouter);
 
+
+
+app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
+//app.use/"api/v1",indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

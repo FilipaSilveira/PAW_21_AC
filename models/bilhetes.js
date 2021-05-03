@@ -2,15 +2,13 @@ const mongoose = require("mongoose");
 
 const BilhetesSchema = new mongoose.Schema({
     id_cliente:{
-        //type:mongoose.Schema.Types.ObjectId, 
-        //ref:'utilizadores',
-        type:Number,
+        type:mongoose.Schema.Types.ObjectId, 
+        ref:'utilizadores',
         require:true
     },
     codigo_evento:{
-        //type:mongoose.Schema.Types.ObjectId,
-        //ref:'eventos',
-        type:Number,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'eventos',
         require:true
     },
     data_reserva:{ 
@@ -20,13 +18,13 @@ const BilhetesSchema = new mongoose.Schema({
     },
     estado:{
         type:String,
-        enum : ['cancelado','pendente','confirmado'],
+        enum : ['Cancelado','Pendente','Confirmado'],
         default: 'pendente',
         require:true
     },
     teste_covid:{
         type:String,
-        maxlength:100
+        enum:['Positivo','Negativo']
     },
     codigo_bilhete:{
         type:Number,

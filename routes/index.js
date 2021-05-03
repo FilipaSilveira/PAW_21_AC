@@ -2,21 +2,22 @@ var express = require('express');
 var router = express.Router();
 const {  ensureAuthenticated,forwardAuthenticated } = require('../config/auth');
 const IndexController=require("../controllers/indexController");
-/* GET home page. */
+//Pagina de login
+
 router.get('/',forwardAuthenticated,IndexController.login);
+
+//Validar login
+
+router.post('/login',IndexController.login2);
 
 //Reencaminhar diferentes tipos de utilziadores para as suas respectivas home pages
 
 router.get('/dashboard', ensureAuthenticated, IndexController.dashboard);
   
-//Pagina de login
 
-router.get('/login', forwardAuthenticated,IndexController.login);
+//router.get('/login', forwardAuthenticated,IndexController.login);
   
-//Validar login
 
-router.post('/login',IndexController.login2);
-  
 //Pagina de registo
 
 router.get('/registar', forwardAuthenticated,IndexController.registar);

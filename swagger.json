@@ -1,0 +1,686 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "version":"1.0.0",
+        "title":"Eventos",
+        "description":"REST API para venda de bilhetes para os mais diversos Eventos!"
+    },
+    "host":"localhost:3000",
+    "basePath":"/",
+    "tags":[
+        {
+            "name": "Admin",
+            "description": "API para o admin"
+        },
+        {
+            "name":"Promotor",
+            "description":"API para os promotores"
+        },
+        {
+            "name":"Utilizador",
+            "description":"API para os utilizadores"
+        },
+        {
+            "name":"Index",
+            "description":"API para gerir login e logout"
+        }
+    ],
+    "schemes":[
+        "http"
+    ], 
+    "consumes":[
+        "application/json"
+    ],
+    "produces":[
+        "application/json"
+    ],
+    "paths":{
+        "/admin/":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obtem página inicial",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/promotores":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obter página para gerir Promotores",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }   
+        },
+        "/admin/promotores/adicionar":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obter página com formulario para adiconar promotores",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+                
+            },
+            "post":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Guardar os dados do promotor criado",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/promotores/listar":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Listagem  dos promotores",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "admin/promotores/alterar/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do promotor escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obter página para alterar os dados do promotor",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Guardar as alteraçoes feitas nos dados do promotor ",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/promotores/remover/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do promotor escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Remover um promotor da base de dados",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/utilizadores":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obter a pagina para gerir utilizadores",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/utilizadores/listar":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obter a página com a lista de utilizadores",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/utilizadores/alterar/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do utilizadore escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Obtem a página com o formulario para alterar dados do utilizador",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Guarda os dados alterados do utilizador",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/utilizadores/remover/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do utilizador escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Remove o utilizador escolhido",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/admin/password":{
+            "get":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Formulario para alteraçao da password do admin",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Admin"
+                ],
+                "summary":"Guardar na base de dados a nova password do admin",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/":{
+            "get":{
+                "tags":[
+                    "Index"
+                ],
+                "summary":"Obtem a página para efetuar login",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/login":{
+            "post":{
+                "tags":[
+                    "Index"
+                ],
+                "summary":"Valida o login",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/dashboard":{
+            "get":{
+                "tags":[
+                    "Index"
+                ],
+                "summary":"Atribuir diferences paginas principais consoante o tipo de utilizador",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/registar":{
+            "get":{
+                "tags":[
+                    "Index"
+                ],
+                "summary":"Formulario para registo na aplicaçao",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Index"
+                ],
+                "summary":"Validar e guardar o registo",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/utilizador/":{
+            "get":{
+                "tags":[
+                    "Utilizador"
+                ],
+                "summary":"Obtem a página principal do utilizador",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/":{
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a página do Promotor",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/locais_espetaculos":{
+            "post":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Listagem dos locais de espetaculo do promotor logado",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/adicionar_local":{
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a página do formulario para adicionar um local de espetaculos",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Guarda na base de dados o novo local de espetaculos criado",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/alterar_local/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do local de espetaculos escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a página do formulario para alterar um local de espetaculos",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Guarda os dados alterados do local de espetaculos",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/remover_local/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do local de espetaculos escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Remover da base de dados o local de espetaculos escolhido",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/eventos/{local}":{
+            "parameters":[
+                {
+                    "name":"local",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do local de espetaculos escolhido",
+                    "type":"string"
+                }],
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Listagem dos eventos do local de espetaculos escolhido",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/adicionar_evento/{local}":{
+            "parameters":[
+                {
+                    "name":"local",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do local de espetaculos escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a página do formulario para adicionar um evento ao local de espetaculos escolhido",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+        "/promotor/adicionar_evento/{local},{idPromotor}":{
+            "post":{
+                "parameters":[
+                    {
+                        "name":"local",
+                        "in":"path",
+                        "required":true,
+                        "description":"Id do local de espetaculos escolhido",
+                        "type":"string"
+                    },
+                    {
+                        "name":"idPromotor",
+                        "in":"path",
+                        "required":true,
+                        "description":"Id do promotor que cria o evento",
+                        "type":"string"
+                    }
+                ],
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Guarda os dados alterados do evento na base de dados",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/eventos/alterar_evento/{local}/{id_evento}":{
+            "parameters":[
+                {
+                    "name":"local",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do local de espetaculos escolhido",
+                    "type":"string"
+                },
+                {
+                    "name":"id_evento",
+                    "in":"path",
+                    "required":true,
+                    "description":"Id do evento escolhido",
+                    "type":"string"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a pagina do formulario para alterar o evento escolhido",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Guarda os dados alterados do evento na base de dados",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/Promotor/eventos/remover_evento/{local}{id_evento}":{
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Remove um evento de um local de espetaculos",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        },
+        "/promotor/bilhetes":{
+            "get":{
+                "tags":[
+                    "Promotor"
+                ],
+                "summary":"Obtem a pagina para gerir os bilhetes",
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions":{
+        "utilizadores":{
+            "type": "object",
+            "properties": {
+                "nome": {
+                    "type": "string"
+                },
+                "nif": {
+                    "type": "number"
+                },
+               
+                "tipo_utilizador": {
+                    "type": "string",
+                    "enum":["admin", "promotor", "cliente"]
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "data_nascimento": {
+                    "type": "string"
+                }
+            }
+        },
+        "locais": {
+            "type": "object",
+            "properties": {
+                "morada":{
+                    "type":"string"
+                },
+                "limitacao_lotacao":{
+                    "type": "number"
+                },
+                "codigo":{
+                    "type":"number"
+                },
+                "lotacao":{
+                    "type": "number"
+                },
+                "id_promotor" : {
+                    "type":"string"
+                }
+            }
+        },
+        "eventos": {
+            "type": "object",
+            "properties": {
+                "nome":{
+                    "type": "string"
+                },
+                "id_promotor": {
+                    "type": "string"
+                },
+                "quantidade_bilhetes":{
+                    "type": "number"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "codigo_local":{
+                    "type":"number"
+                },
+                "descricao":{
+                    "type":"string"
+                },
+                "preco_bilhete":{
+                    "type":"number"
+                },
+                "codigo_evento":{
+                    "type":"number"
+                },
+                "poster":{
+                    "type":"string"
+                }
+            }
+        },
+        "bilhetes": {
+            "type": "object",
+            "properties": {
+                "id_cliente": {
+                    "type": "string"
+                },
+                "codigo_evento": {
+                    "type":"number"
+                },
+                "data_reserva": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "string",
+                    "enum":["Cancelado","Pendente","Confirmado"]
+                },
+                "teste_covid": {
+                    "type": "string",
+                    "enum":["Positivo","Negativo"]
+                },
+                "codigo_bilhete": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
+}

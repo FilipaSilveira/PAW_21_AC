@@ -36,6 +36,11 @@ const EventosSchema = new mongoose.Schema({
         type:Number,
         unique:true,
         require:true
+    },
+    poster:{
+        type:String,
+        unique:true,
+        require:true
     }
 },
 {

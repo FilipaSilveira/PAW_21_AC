@@ -24,13 +24,13 @@ router.get('/promotores/listar',AdminController.listar_promotores);
 
 //Alterar Promotores
 
-router.get('/promotores/alterar/:nif',AdminController.alterar_promotores);
+router.get('/promotores/alterar/:id',AdminController.alterar_promotores);
 
-router.post('/promotores/alterar',AdminController.alterar_promotores2);
+router.post('/promotores/alterar/:id',AdminController.alterar_promotores2);
 
 //Remover Promotores
 
-router.get('/promotores/remover/:nif',AdminController.remover_promotores);
+router.get('/promotores/remover/:id',AdminController.remover_promotores);
 
 
 

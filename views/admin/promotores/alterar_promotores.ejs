@@ -3,8 +3,7 @@
   <body>
     <div class="container">
       <h1>Alterar Promotor</h1>
-      <form action="/admin/promotores/alterar" method="POST">
-        <input type="hidden" name="_id" value="<%= promotor._id %>">
+      <form action="/admin/promotores/alterar/<%= promotor._id" method="POST">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<%= promotor.email%>" required/>
         <label for="nome">Nome</label>
