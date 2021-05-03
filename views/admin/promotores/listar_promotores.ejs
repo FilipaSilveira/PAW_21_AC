@@ -1,69 +1,47 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title><%= title %></title>
-</head>
-<body>
-
-<h3> Lista de Promotores</h3>
-<table class="table table-striped">
-    <thead>
+  <body>
+    <h3>Lista de Promotores</h3>
+    <% if(promotores.length==0){ %>
+    <h2>Promotores nao encontrados</h2>
+    <h6>Adicione agora um promotor!</h6>
+    <a href="/admin/promotores/adicionar">Adicionar promotor</a>
+    <% } else{ %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-            <th>Nome</th>
-            <th>Nif</th>
-            <th></th>
+          <th>Nome</th>
+          <th>Nif</th>
+          <th>Email</th>
+          <th>Data Nascimento</th>
         </tr>
-    </thead>
-    <tbody>
-        <% for(var promotor of promotores) { %>       
-            <tr>
-            <td><%= promotor.nome %></td>
-            <td><%= promotor.nif %></td>
-            <td>
-                <a href="/admin/promotores/alterar/<%= promotor.nif %> ">alterar</a>
-                <a href="/admin/promotores/remover/<%= promotor.nif %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">remover</a>
-            </td>
+      </thead>
+      <tbody>
+        <% for(var promotor of promotores) { 
+        let ano = new Date(promotor.data_nascimento).getFullYear(); 
+        let mes = ("0" + (new Date(promotor.data_nascimento).getMonth() + 1)).slice(-2); 
+        let dia=("0" + new Date(promotor.data_nascimento).getDate()).slice(-2); 
+        var data=(dia+'/'+mes+'/'+ano);
+        %>
+        <tr>
+          <td><%= promotor.nome %></td>
+          <td><%= promotor.nif %></td>
+          <td><%= promotor.email %></td>
+          <td><%= data %></td>
+          <td>
+            <a href="/admin/promotores/alterar/<%= promotor.nif %> ">alterar</a>
+            <a
+              href="/admin/promotores/remover/<%= promotor.nif %>"
+              onclick="return confirm('Tem a certeza que quer eliminar este registo?');"
+              >remover</a
+            >
+          </td>
         </tr>
         <% } %>
-    </tbody>
-    
-</table>
-<a href="/admin/promotores/adicionar"> Adicionar Novo</a>
-<a href="/admin/promotores"> voltar</a>
-</body>
-</html>
-
-
-<!--<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Listar Promotores</title>
-</head>
-<body>
-    <div class="container">
-    <h1>Promotores: </h1>
-    <table>
-        <tbody>
-            <tr>
-                <th>NOME</th>
-                <th>NIF</th>
-                <th>DATA DE NASCIMENTO</th>
-                <th>EMAIL</th>
-            <% if(promotores.length){
-            promotores.forEach(function(promotor){ %>
-            <tr>
-                <td align="center"><%= promotor.nome %></td>
-                <td align="center"><%= promotor.nif %></td>
-                <td align="center"><%= promotor.data_nascimento %></td>
-                <td align="center"><%= promotor.email %></td>
-            <% });} %>
-            </tr>
-        </tbody>
+      </tbody>
     </table>
-</div>
-</body>
-
+    <a href="/admin/promotores/adicionar"> Adicionar Novo</a>
+    <% } %>
+    <a href="/admin/promotores"> voltar</a>
+  </body>
 </html>
--->

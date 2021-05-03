@@ -1,66 +1,62 @@
 var express = require('express');
 var router = express.Router();
 var PromotorController=require("../controllers/PromotorController");
-router.get('/', function(req, res, next) {
-    PromotorController.index(req,res,next);
-});
+var multer  = require('multer');
+var upload=multer({dest:'uploads/'});
+//Index Promotores
 
-router.get('/locais_espetaculos', function(req, res, next) {
-    PromotorController.locais_espetaculos(req,res,next);
-});
+router.get('/',PromotorController.index);
 
-router.get('/adicionar_local', function(req, res, next) {
-    PromotorController.adicionar_local(req,res,next);
-});
+// Listar Locais de Espetaculo
 
-router.post('/adicionar_local', function(req, res, next) {
-    PromotorController.guardar_local(req,res,next);
-});
+router.get('/locais_espetaculos',PromotorController.locais_espetaculos);
 
-router.get('/alterar_local/:id', function(req, res, next) {
-    PromotorController.alterar_local(req,res,next);
-});
+//Adicionar Local de Espetaculo
 
-router.post('/alterar_local/:id', function(req, res, next) {
-    PromotorController.atualizar_local(req,res,next);
-});
-router.get('/remover_local/:id', function(req, res, next) {
-    PromotorController.remover_local(req,res,next);
-});
+router.get('/adicionar_local',PromotorController.adicionar_local);
 
+router.post('/adicionar_local',PromotorController.guardar_local);
 
-router.get('/eventos', function(req, res, next) {
-    PromotorController.eventos(req,res,next);
-});
+//Alterar locais de espetaculo
 
-router.get('/eventos/:local', function(req, res, next) {
-    PromotorController.listar_eventos(req,res,next);
-});
+router.get('/alterar_local/:id',PromotorController.alterar_local);
 
-router.get('/eventos/alterar_evento/:local/:id_evento', function(req, res, next) {
-    PromotorController.alterar_evento(req,res,next);
-});
-router.post('/eventos/alterar_evento/:local/:id_evento', function(req, res, next) {
-    PromotorController.atualizar_evento(req,res,next);
-});
+router.post('/alterar_local/:id',PromotorController.atualizar_local);
 
-router.get('/eventos/remover_evento/:local/:id_evento', function(req, res, next) {
-    PromotorController.remover_evento(req,res,next);
-});
+//Remover Local de Espetaculo
 
-router.get('/eventos/adicionar_evento/:local', function(req, res, next) {
-    PromotorController.adicionar_evento(req,res,next);
-});
-
-router.post('/eventos/adicionar_evento/:local/:idPromotor', function(req, res, next) {
-    PromotorController.guardar_evento(req,res,next);
-});
+router.get('/remover_local/:id',PromotorController.remover_local);
 
 
 
-router.get('/bilhetes', function(req, res, next) {
-    PromotorController.bilhetes(req,res,next);
-});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Listar Eventos de um determinado Espetaculo
+
+router.get('/eventos/:local',PromotorController.listar_eventos);
+
+//Adicionar um evento
+
+router.get('/eventos/adicionar_evento/:local',PromotorController.adicionar_evento);
+
+router.post('/eventos/adicionar_evento/:local/:idPromotor',upload.single('poster'),PromotorController.guardar_evento);
+
+//Alterar um evento 
+
+router.get('/eventos/alterar_evento/:local/:id_evento',PromotorController.alterar_evento);
+
+router.post('/eventos/alterar_evento/:local/:id_evento',PromotorController.atualizar_evento);
+
+//Remover um evento
+
+router.get('/eventos/remover_evento/:local/:id_evento',PromotorController.remover_evento);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.get('/bilhetes',PromotorController.bilhetes);// Ainda nao sei se faz sentido ter esta rota!
 
 
 module.exports = router;

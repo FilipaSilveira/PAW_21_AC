@@ -1,59 +1,69 @@
 var express = require('express');
 var router = express.Router();
 var AdminController=require("../controllers/AdminController");
-router.get('/', function(req, res, next) {
-  AdminController.index(req,res,next);
-});
+
+
+//Index admin
+
+router.get('/',AdminController.index);
+
+// index Promotores
 
 router.get('/promotores',AdminController.index_promotores);
 
-router.get('/promotores/adicionar', function(req, res, next) {
-  AdminController.adicionar_promotores(req,res,next);
-});
+//Adicionar Promotores
 
-router.post('/promotores/adicionar', function(req, res, next) {
-  AdminController.guardar_promotor(req,res,next);
-});
+router.get('/promotores/adicionar',AdminController.adicionar_promotores);
 
-router.get('/promotores/listar', function(req, res, next) {
-  AdminController.listar_promotores(req,res,next);
-});
-
-router.get('/promotores/alterar/:nif', function(req, res, next) {
-  AdminController.alterar_promotores(req,res,next);
-});
-
-router.post('/promotores/alterar', function(req, res, next) {
-  AdminController.alterar_promotores2(req,res,next);
-});
-
-router.get('/promotores/remover/:nif', function(req, res, next) {
-  AdminController.remover_promotores(req,res,next);
-});
-
-router.get('/utilizadores', function(req, res, next) {
-  AdminController.index_utilizadores(req,res,next);
-});
-
-router.get('/utilizadores/listar', function(req, res, next) {
-  AdminController.listar_utilizadores(req,res,next);
-});
-
-router.get('/promotores/alterar/:nif', function(req, res, next) {
-  AdminController.alterar_utilizadores(req,res,next);
-});
+router.post('/promotores/adicionar',AdminController.guardar_promotor);
 
 
-router.post('/utilizadores/alterar', function(req, res, next) {
-  AdminController.alterar_utilizadores2(req,res,next);
-});
+//Listar Promonores
 
-router.get('/password', function(req, res, next) {
-  AdminController.password(req,res,next);
-});
+router.get('/promotores/listar',AdminController.listar_promotores);
 
-router.post('/password', function(req, res, next) {
-  AdminController.password2(req,res,next);
-});
+//Alterar Promotores
+
+router.get('/promotores/alterar/:nif',AdminController.alterar_promotores);
+
+router.post('/promotores/alterar',AdminController.alterar_promotores2);
+
+//Remover Promotores
+
+router.get('/promotores/remover/:nif',AdminController.remover_promotores);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Index Utilizadores
+
+router.get('/utilizadores',AdminController.index_utilizadores);
+
+//Listar Utilizadores
+
+router.get('/utilizadores/listar',AdminController.listar_utilizadores);
+
+//Alterar Utilizadores
+
+router.get('/utilizadores/alterar/:id',AdminController.alterar_utilizadores);
+
+router.post('/utilizadores/alterar/:id',AdminController.guardar_utilizadores);
+
+//Remover Utilizadores
+
+router.get('/utilizadores/remover/:id',AdminController.remover_utilizadores);
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Alterar password admin
+
+router.get('/password',AdminController.password);
+
+router.post('/password',AdminController.password2);
 
 module.exports = router;

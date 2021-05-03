@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title><%= title %></title>
-</head>
 <body>
-
 <h3> Lista de Clientes</h3>
 <table class="table table-striped">
     <thead>
@@ -18,11 +13,11 @@
     <tbody>
         <% for(var cliente of clientes) { %>       
             <tr>
-            <td><%= clinte.nome %></td>
+            <td><%= cliente.nome %></td>
             <td><%= cliente.nif %></td>
             <td>
-                <a href="/admin/utilizadores/alterar/<%= cliente.nif %> ">alterar</a>
-                <a href="/admin/utilizadores/remover/<%= cliente.nif %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">remover</a>
+                <a href="/admin/utilizadores/alterar/<%= cliente._id %> ">alterar</a>
+                <a href="/admin/utilizadores/remover/<%= cliente._id %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">remover</a>
             </td>
         </tr>
         <% } %>

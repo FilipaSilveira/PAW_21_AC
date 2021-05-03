@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/form.css" />
-  </head>
   <body>
     <div class="container">
       <h1>Alterar Cliente</h1>
-      <form action="/admin/utilizadores/alterar" method="POST">
-        <input type="hidden" name="_id" value="<%= cliente._id %>">
+      <form action="/admin/utilizadores/alterar/<%= cliente._id%>" method="POST">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<%= cliente.email%>" required/>
         <label for="password">Password</label>

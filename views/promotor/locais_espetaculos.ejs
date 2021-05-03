@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title><%= title %></title>
-</head>
 <body>
-
 <h3> Lista de Locais de Espetaculos</h3>
+<% if(locais.length==0){ %>
+    <h6>Locais de espetaculos nao encontrados!</h6>
+    <h6>Por favor adicione primeiro um local</h6>
+    <a href="/promotor/adicionar_local">Inserir novo local espetaculo</a>
+    <% } else{ %>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Morada</th>
-            <th>Lotaçao</th>
-            <th>Limitaçao da Lotaçao</th>
+            <th>Lotaçao Maxima</th>
+            <th>Limitação da Lotaçao</th>
+            <th>Lotação permetida</th>
             <th>Codigo do Local</th>
             <th>Eventos</th>
         </tr>
@@ -22,8 +23,9 @@
             <tr>
             <td><%= local.morada %></td>
             <td><%= local.lotacao %></td>
-            <td><%= local.limitacao_lotacao %></td>
-            <td><%= local.codigo_local %></td>
+            <td><%= local.limitacao_lotacao %>%</td>
+            <td><%= Math.floor(local.lotacao-(local.lotacao * (local.limitacao_lotacao/100)))%></td>
+            <td><%= local.codigo %></td>
             <td><a href="/promotor/eventos/<%= local._id%>">Mostrar Eventos</a></td>
             <td>
                 <a href="/promotor/alterar_local/<%= local._id %> ">Alterar Local</a>
@@ -32,9 +34,9 @@
         </tr>
         <% } %>
     </tbody>
-    
 </table>
 <a href="/promotor/adicionar_local"> Adicionar Novo Local</a>
+<% } %>
 <a href="/promotor"> voltar</a>
 </body>
 </html>

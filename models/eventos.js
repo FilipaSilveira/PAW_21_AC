@@ -8,13 +8,19 @@ const EventosSchema = new mongoose.Schema({
     },
     id_promotor:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'utilizadores',
+        require:true
+    },
+    quantidade_bilhetes:{
+        type:Number,
+        min:1,
+        require:true
+    },
+    data:{
+        type:Date,
         require:true
     },
     codigo_local:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'locais',
-        unique:true,
         require:true
     },
     descricao:{

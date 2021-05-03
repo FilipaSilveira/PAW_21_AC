@@ -12,7 +12,6 @@ const UtilizadoresSchema = new mongoose.Schema({
     },
     password:{
         type:String,
-        length:50,
         require:true
     },
     nif:{

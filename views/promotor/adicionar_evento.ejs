@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/form.css" />
-  </head>
   <body>
     <div class="container">
+      <%- include('../alertas') %>
       <h1>Adicionar Evento</h1>
-      <form action="/promotor/eventos/adicionar_evento/<%= local %>/<%= _idPromotor%>" method="POST">
+      <form action="/promotor/eventos/adicionar_evento/<%= local %>/<%= _idPromotor%>" method="POST" enctype="multipart/form-data">
         <label for="nome">Nome do Evento</label>
         <input
           type="string"
           id="nome"
           name="nome"
           placeholder="Nome do Evento"
+          value="<%= typeof nome != 'undefined' ? nome : '' %>"
           required
         />
         <label for="lotacao">Data Evento</label>
@@ -22,6 +20,7 @@
           id="data"
           name="data"
           placeholder="Data"
+          value="<%= typeof data != 'undefined' ? data : '' %>"
           required
         />
         <label for="descricao">Descricao</label>
@@ -30,6 +29,7 @@
           id="descricao"
           name="descricao"
           placeholder="Descriçao"
+          value="<%= typeof descricao != 'undefined' ? descricao : '' %>"
           required
         />
         <label for="preco">Preco do Bilhete</label>
@@ -39,6 +39,24 @@
           name="preco"
           placeholder="Preço"
           min="1"
+          value="<%= typeof preco != 'undefined' ? preco : '' %>"
+          required
+        />
+        <label for="bilhetes">Nº de Bilhetes para venda</label>
+        <input
+          type="number"
+          id="bilhetes"
+          name="bilhetes"
+          placeholder="Nº bilhetes"
+          min="1"
+          required
+        />
+        <label for="poster">Poster Promocional</label>
+        <input
+          type="file"
+          id="poster"
+          name="poster"
+          placeholder="Poster"
           required
         />
         <button type="submit">Criar Evento</button>

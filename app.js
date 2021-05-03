@@ -1,22 +1,35 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const expressLayouts = require('express-ejs-layouts');
 var logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-
-var indexRouter = require('./routes/index');
-var utilizadoresRouter = require('./routes/utilizador');
-var promotoresRouter=require('./routes/promotor');
-var adminRouter=require('./routes/admin');
-
+const {  ensureAuthenticated } = require('./config/auth');
+const Check_Admin=require("./config/check_admin");
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+
+
+
+// Passport Config
+require('./config/passport')(passport);
+
+
+console.log('${MONGO_DB_NOME}');
+let mongoose=require("mongoose");
+mongoose.Promise=global.Promise;
+mongoose.connect('mongodb://'+process.env.HOST+'/'+process.env.NOME_BASE_DE_DADOS,{useNewUrlParser:true})
+.then(Check_Admin())
+.catch(function(err){console.error(err)});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,14 +37,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Passport Config
-require('./config/passport')(passport);
-
 // Express session
 app.use(
   session({
-    secret: 'secret',
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true
   })
@@ -52,19 +61,15 @@ app.use(function(req, res, next) {
     next();
   });
 
-
-let mongoose=require("mongoose");
-mongoose.Promise=global.Promise;
-mongoose.connect("mongodb://localhost/eventos",{useNewUrlParser:true})
-.then(function(){console.log("Conecçao com a Base de Dados estabelecida com sucesso!!")})
-.catch(function(err){console.error(err)});
-
-
+var indexRouter = require('./routes/index');
+var utilizadoresRouter = require('./routes/utilizador');
+var promotoresRouter=require('./routes/promotor');
+var adminRouter=require('./routes/admin');
 
 app.use('/', indexRouter);
-app.use('/admin', adminRouter);
-app.use('/promotor', promotoresRouter);
-app.use('/utilizador', utilizadoresRouter);
+app.use('/admin', ensureAuthenticated,adminRouter);
+app.use('/promotor', ensureAuthenticated,promotoresRouter);
+app.use('/utilizador', ensureAuthenticated,utilizadoresRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

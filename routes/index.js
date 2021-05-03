@@ -1,65 +1,32 @@
 var express = require('express');
 var router = express.Router();
+const {  ensureAuthenticated,forwardAuthenticated } = require('../config/auth');
 const IndexController=require("../controllers/indexController");
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  IndexController.index(req,res,next);
-});
+router.get('/',forwardAuthenticated,IndexController.login);
 
-router.get('/login', function(req, res, next) {
-  IndexController.login(req,res,next);
+//Reencaminhar diferentes tipos de utilziadores para as suas respectivas home pages
+
+router.get('/dashboard', ensureAuthenticated, IndexController.dashboard);
   
-});
+//Pagina de login
 
-router.post('/login', function(req, res, next) {
-  IndexController.login2(req,res,next);
+router.get('/login', forwardAuthenticated,IndexController.login);
   
-});
-router.get('/registar', function(req, res, next) {
-  IndexController.registar(req,res,next);
- 
-});
+//Validar login
 
+router.post('/login',IndexController.login2);
+  
+//Pagina de registo
 
+router.get('/registar', forwardAuthenticated,IndexController.registar);
 
-router.post('/registar', function(req, res, next) {
-  IndexController.registar2(req,res,next);
-});
+//Valdiar Registo 
 
- /*router.get('/teste', function(req, res, next) {
-  let date_ob = new Date();
+router.post('/registar',IndexController.registar2);
 
-let date = ("0" + date_ob.getDate()).slice(-2);
+//Termino de Sessao
 
-let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-
-let year = date_ob.getFullYear();
-
-let hours = date_ob.getHours();
-
-let minutes = date_ob.getMinutes();
-
-let seconds = date_ob.getSeconds();
-// prints date in YYYY-MM-DD format
-//console.log(year + "-" + month + "-" + date);
-
-// prints date & time in YYYY-MM-DD HH:MM:SS format
-//console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
-
-  const bilhete={
-    teste_covid:"negativo",
-    id_cliente:123,
-    codigo_evento:456,
-    data_reserva:(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds),
-    codigo_bilhete:12345
-  }
-  const novo_bilhete=new Bilhetes(bilhete);
-  novo_bilhete.save();
-  res.send(bilhete);  
-  Bilhetes.findOne({teste_covid:"negativo"},function(err,result){
-    console.log(result);
-    res.send(bilhete);    
-  })
-}); */
+router.get('/logout',IndexController.logout);
 
 module.exports = router;

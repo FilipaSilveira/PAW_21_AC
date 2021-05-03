@@ -15,9 +15,12 @@ const LocaisSchema = new mongoose.Schema({
         type:Number,
         min:1
     },
-    codigo_local:{
+    codigo:{
         type:Number,
-        unique:true,
+        require:true
+    },
+    id_promotor:{
+        type:mongoose.Schema.Types.ObjectId,
         require:true
     }
 },

@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title><%= title %></title>
-</head>
 <body>
-
 <h3> Lista de Eventos do local</h3>
 <% if(eventos.length==0){ %>
     <h2>Este local ainda nao tem eventos associados!</h2>
@@ -18,27 +13,49 @@
             <th>Data</th>
             <th>Descriçao</th>
             <th>Preco bilhete</th>
+            <th>Nº de blhetes para venda iniciais</th>
+            <th>Bilhetes Vendidos</th>
+            <th>Bilhetes Disponiveis</th>
             <th>Codigo do Evento</th>
         </tr>
     </thead>
     <tbody>
-        <% for(var evento of eventos) { %>       
+        <% for(var evento of eventos) { 
+             
+  let ano = new Date(evento.data).getFullYear();
+  let mes = ("0" + (new Date(evento.data).getMonth() + 1)).slice(-2);
+  let dia=("0" + new Date(evento.data).getDate()).slice(-2);
+  let hora = new Date(evento.data).getHours();
+  let minutos = new Date(evento.data).getMinutes();
+  if(minutos>0){
+    var data=(dia+'/'+mes+'/'+ano+'   '+hora+'h'+minutos+'min');
+    
+  }
+  else{
+    var data=(dia+'/'+mes+'/'+ano+'   '+hora+'h');
+  }
+  
+  %>       
             <tr>
             <td><%= evento.nome %></td>
-            <td><%= evento.data %></td>
+            <td><%= data%></td>
             <td><%= evento.descricao %></td>
             <td><%= evento.preco_bilhete %></td>
+            <td><%= evento.quantidade_bilhetes %></td>
+            <td>Adicionar esta Funcionalidade mais tarde</td>
+            <td>Adicionar esta Funcionalidade mais tarde</td>
+            
             <td><%= evento.codigo_evento %></td>
             <td>
                 <a href="/promotor/eventos/alterar_evento/<%= local %>/<%= evento._id %> ">Alterar Evento</a>
                 <a href="/promotor/eventos/remover_evento/<%= local %>/<%= evento._id %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">Remover Evento</a>
             </td>
         </tr>
-        <% } }%>
-    </tbody>
-    
+        <% } %>
+    </tbody> 
 </table>
 <a href="/promotor/eventos/adicionar_evento/<%= local%>">Adicionar novo evento</a>
+<% } %>
 <a href="/promotor/locais_espetaculos"> voltar</a>
 </body>
 </html>
