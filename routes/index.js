@@ -14,8 +14,9 @@ router.post('/login',IndexController.login2);
 
 router.get('/dashboard', ensureAuthenticated, IndexController.dashboard);
   
+//Pagina de login
 
-//router.get('/login', forwardAuthenticated,IndexController.login);
+router.get('/login', forwardAuthenticated,IndexController.login);
   
 
 //Pagina de registo

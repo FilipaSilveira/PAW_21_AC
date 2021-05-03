@@ -5,7 +5,7 @@ const passport = require("passport");
 const IndexController = {};
 //Encaminhar o tipo de utilizador para a sua homePage
 
-IndexController.dashboard = function (req, res) {
+IndexController.dashboard = function (req, res,next) {
   if (req.user.tipo_utilizador == "admin") {
     res.redirect("/admin");
   } else if (req.user.tipo_utilizador == "promotor") {
@@ -17,7 +17,7 @@ IndexController.dashboard = function (req, res) {
 
 //Mostra a pagina de  login
 
-IndexController.login = function (req, res) {
+IndexController.login = function (req, res,next) {
   res.render("login");
 };
 
@@ -39,7 +39,7 @@ IndexController.registar = function (req, res) {
 
 //Validar e guardar registo na base de dados
 
-IndexController.registar2 = function (req, res) {
+IndexController.registar2 = function (req, res,next) {
    //inserir validaçoes mais tarde
   const { nome, email, password, nif, data_nascimento } = req.body;
   let errors = [];

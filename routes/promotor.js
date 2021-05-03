@@ -52,11 +52,20 @@ router.post('/eventos/alterar_evento/:local/:id_evento',PromotorController.atual
 
 router.get('/eventos/remover_evento/:local/:id_evento',PromotorController.remover_evento);
 
+//Apresentar o poster do evento
+
+//Nao esta a funcionar corretamente 
+
+router.get('/uploads/:filename',PromotorController.poster);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/bilhetes',PromotorController.bilhetes);// Ainda nao sei se faz sentido ter esta rota!
+
+
+
+
+router.get('/bilhetes',PromotorController.bilhetes);
 
 
 module.exports = router;

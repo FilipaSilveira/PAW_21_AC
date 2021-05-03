@@ -10,7 +10,7 @@ PromotorController.index = function (req, res, next) {
 
 //Listagem dos locais de espetaculos inseridos pelo promotor
 
-PromotorController.locais_espetaculos = function (req, res) {
+PromotorController.locais_espetaculos = function (req, res,next) {
   Locais.find({id_promotor:req.user._id}, (err, locais) => {
     if (err) {
       next(err);
@@ -97,7 +97,7 @@ PromotorController.remover_local = function (req, res, next) {
 
 // Listagem de eventos de um determinado local de espetaculos
 
-PromotorController.listar_eventos = function (req, res) {
+PromotorController.listar_eventos = function (req, res,next) {
   Eventos.find({codigo_local:req.params.local},(err,eventos)=>{
     if(err){
       next(err);
@@ -108,13 +108,13 @@ PromotorController.listar_eventos = function (req, res) {
 
 //Mostra a pagina com o formulario para adicionar um evento a um determinado local de espetaculos
 
-PromotorController.adicionar_evento = function (req, res) {
+PromotorController.adicionar_evento = function (req, res,next) {
   res.render("promotor/adicionar_evento",{title:"Adicionar Evento",local:req.params.local,_idPromotor:req.user._id});
 };
 
 // Guarda na base de dados o evento criado
 
-PromotorController.guardar_evento = function (req, res) {
+PromotorController.guardar_evento = function (req, res,next) {
  //inserir validaçoes mais tarde
  let errors=[];
  const nome= req.body.nome;
@@ -123,7 +123,8 @@ PromotorController.guardar_evento = function (req, res) {
  const preco=req.body.preco;
  const bilhetes=req.body.bilhetes;
  const local=req.params.local;
- const poster=file.filename;
+ const poster=req.file.filename;
+ console.log(poster);
 Locais.findOne({_id:req.params.local},(err,result)=>{
   if(err){
     next(err);
@@ -171,7 +172,7 @@ res.redirect("/promotor/eventos/"+req.params.local);
 
 // Remove um evento da base de dados
 
-PromotorController.remover_evento = function (req, res) {
+PromotorController.remover_evento = function (req, res,next) {
  Eventos.remove({_id:req.params.id_evento},(err)=>{
    if(err){
      next(err);
@@ -182,7 +183,7 @@ PromotorController.remover_evento = function (req, res) {
 
 //Mostra a pagina com o formulario para alterar um evento
 
-PromotorController.alterar_evento = function (req, res) {
+PromotorController.alterar_evento = function (req, res,next) {
   Eventos.findOne({_id:req.params.id_evento},(err,evento)=>{
     if(err){
       next(err);
@@ -193,7 +194,7 @@ PromotorController.alterar_evento = function (req, res) {
 
  //Guarda na base de dados as alteraçoes feitas ao evento
 
- PromotorController.atualizar_evento = function (req, res) {
+ PromotorController.atualizar_evento = function (req, res,next) {
   Eventos.findOneAndUpdate({_id:req.params.id_evento},{$set:{nome: req.body.nome,
     data: req.body.data,
     descricao: req.body.descricao,
@@ -204,6 +205,10 @@ PromotorController.alterar_evento = function (req, res) {
       res.redirect("/promotor/eventos/"+req.params.local);
     });
  };
+
+ PromotorController.poster=function(req,res){
+   res.render("promotor/poster",{filename:req.params.filename})
+ }
 
 // Mostra a pagina de gestao dos Bilhetes
 // Gestao dos bilheres incompleto.Acabar na 2 parte

@@ -46,7 +46,7 @@
             <td>Adicionar esta Funcionalidade mais tarde</td>
             <td>Adicionar esta Funcionalidade mais tarde</td>
             <td><%= evento.codigo_evento %></td>
-            <td><a href="http://localhost:3000/uploads/<%=evento.poster%>.png">Ver</a></td>
+            <td><a href="/uploads/<%=evento.poster%>.png">Ver</a></td>
             <td>
                 <a href="/promotor/eventos/alterar_evento/<%= local %>/<%= evento._id %> ">Alterar Evento</a>
                 <a href="/promotor/eventos/remover_evento/<%= local %>/<%= evento._id %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');">Remover Evento</a>

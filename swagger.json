@@ -481,7 +481,8 @@
                         "description":"OK"
                     }
                 }
-            },
+            }
+        },   
         "/promotor/adicionar_evento/{local},{idPromotor}":{
             "post":{
                 "parameters":[
@@ -682,5 +683,4 @@
             }
         }
     }
-}
 }
